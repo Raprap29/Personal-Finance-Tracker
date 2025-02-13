@@ -71,7 +71,7 @@ class UserService {
             return {token, user};
 
         }catch(error: any){
-            throw new Error(error);
+            throw new Error(error?.message);
         }
     }
 

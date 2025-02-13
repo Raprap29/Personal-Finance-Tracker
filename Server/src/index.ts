@@ -3,6 +3,7 @@ import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/bun'
 import { createYoga } from 'graphql-yoga';
 import { server } from './graphql';
+import { AuthMiddleware } from './middleware/auth.middleware';
 const app = new Hono()
 
 app.use(cors());
@@ -25,10 +26,15 @@ const yoga = createYoga({
 
 })
 
-app.use('/graphql', async (c) => {
+app.use('/graphql', AuthMiddleware ,async (c) => {
   const response = await yoga.fetch(c.req.raw)
   return response
 })
+
+app.all('/graphql', async (c) => {
+  const response = await yoga.fetch(c.req.raw); // Handle GraphQL query
+  return response;
+});
 
 app.get('/health', (c) => c.json({ status: 'ok' }))
 
