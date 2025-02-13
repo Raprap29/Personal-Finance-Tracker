@@ -1,9 +1,7 @@
-import {Fragment} from 'react'
+import React from 'react'
 
-export const Login = () => {
-    return (
-        <Fragment>
-            Login
-        </Fragment>
-    )
+export default function Login() {
+  return (
+    <div>Login</div>
+  )
 }

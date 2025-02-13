@@ -13,10 +13,10 @@ const PublicRoute: React.FC<ElementProp> = ({ Element, title }) => {
     document.title = title;
 
     if (token) {
-        return <Navigate to="/dashboard" replace />;
+        return <Navigate to="/list" />;
     }
 
-    return <Element />;
+    return <Element  />;
 }
 
 export default PublicRoute;

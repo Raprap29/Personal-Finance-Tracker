@@ -1,15 +1,15 @@
 // src/routes/auth.routes.tsx
-import { RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router";
 
 // Import components/routes
-import PublicRoute from "../components/public.routes";
+import PublicRoute from "../components/publicRoute";
 
 // Import views/pages
-import { Login } from "../../views/Auth/Login";
+import Login from "../../views/Auth/Login";
 
 export const authRoutes: RouteObject[] = [
     {
-        path: '/login',
+        path: '/',
         element: <PublicRoute Element={Login} title="Login" />
     }
 ];
