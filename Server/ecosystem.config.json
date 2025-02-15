@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "hono-app",
+      "script": "bun",
+      "args": "run src/index.ts",
+      "watch": true,
+      "interpreter": "none",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

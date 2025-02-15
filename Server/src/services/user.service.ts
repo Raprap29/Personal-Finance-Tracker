@@ -1,6 +1,8 @@
 import prisma from "@/config/database";
 import { comparePassword } from "@/helper";
-import { jwt, sign } from "hono/jwt";
+import { Context } from "hono";
+import { setCookie } from "hono/cookie";
+import { sign } from "hono/jwt";
 interface User {
     firstName: string;
     lastName: string;
@@ -65,10 +67,17 @@ class UserService {
                 id: user.id,
                 exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7, // 1 week login
             };
+            const SECRET_KEY = Bun.env.SECRET_KEY;
 
-            const token = sign(payload, "Iloveyou");
-            
-            return {token, user};
+            if(!SECRET_KEY){
+                throw new Error("No key");
+            }
+
+            const maxAge = 60 * 60 * 24 * 7; // 7 days in seconds
+
+            const token = await sign(payload, SECRET_KEY);
+            const cookie = `auth_token=${token}; HttpOnly; Path=/; Max-Age=${maxAge}; Secure; SameSite=Strict`
+            return {cookie, user, token};
 
         }catch(error: any){
             throw new Error(error?.message);

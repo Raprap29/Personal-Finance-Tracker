@@ -1,4 +1,5 @@
 import userService from "@/services/user.service";
+import { Context } from "hono";
 
 interface CreateUserInput {
     firstName: string;
@@ -22,6 +23,7 @@ export const userResolvers = {
         },
         login: async (_:any, {email, password}: {email: string, password: string}) => {
             const response = await userService.Login({email, password});
+
             return {token: response.token, user: response.user};
         }
     }

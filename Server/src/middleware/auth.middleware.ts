@@ -9,9 +9,13 @@ export const AuthMiddleware = async (c: Context, next: Next) => {
         throw new Error("Access is token required");
     }
 
-    const secretKey = "Iloveyou";
+    const SECRET_KEY = Bun.env.SECRET_KEY;
 
-    const decodedPayload = await verify(accessToken, secretKey)
+    if(!SECRET_KEY){
+        throw new Error("No key");
+    }
+
+    const decodedPayload = await verify(accessToken, SECRET_KEY)
 
     if(!decodedPayload){
         throw new Error("Unauthorized pages");

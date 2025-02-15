@@ -8,11 +8,13 @@ export const incomeTypeDefs = `
   }
  
   extend type Query {
-    incomes: [Income!]!
+    incomes: [Income!]! @auth
   }
 
   extend type Mutation {
-    createIncome(pesos: Float!, userId: ID!): Income!
+    createIncome(pesos: Float!, userId: ID!): Income! @auth
   }
+
+  directive @auth on FIELD_DEFINITION
     
 `;

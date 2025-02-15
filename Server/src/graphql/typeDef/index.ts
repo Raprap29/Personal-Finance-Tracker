@@ -1,3 +1,4 @@
+import { expenseTypeDefs } from "./expence.typeDefs";
 import { incomeTypeDefs } from "./income.typeDefs";
 import { userTypeDefs } from "./user.typeDefs";
 
@@ -12,4 +13,5 @@ export const typeDefs = `#graphql
 
     ${userTypeDefs}
     ${incomeTypeDefs}
+    ${expenseTypeDefs}
 `;
